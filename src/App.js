@@ -16,12 +16,8 @@ class App extends Component {
 
     return(
       <div className="App">
-         <div className="info">
           <Info></Info>
-         </div>
-         <div className="cv-display">
           <Display></Display>
-         </div>
       </div>
     );
 

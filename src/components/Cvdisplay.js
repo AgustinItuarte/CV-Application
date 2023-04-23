@@ -13,8 +13,10 @@ class Display extends Component {
 
     render(){
         return (
-
-            <h2>CV display</h2>
+            <div className="cv-display">
+                <h2>CV display</h2>
+            </div>
+            
 
         );
     }

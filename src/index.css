@@ -26,11 +26,19 @@ body, #root, .App {
 .info, .cv-display {
     border: 1px solid black;
     height: 95%;
-    width: 30%;
+    width: 32%;
 }
+
 .info {
     background-color: rgb(111, 111, 209);
     
+}
+
+.info > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 25px;
 }
 
 .cv-display {
