@@ -12,11 +12,21 @@ class Display extends Component {
     }
 
     render(){
-        return (
-            <div className="cv-display">
-                <h2>CV display</h2>
-            </div>
+        let dataArray = this.props.text;
+        // return(
+        //     <div className="cv-display">
+        //         <h1 id="name">{dataArray[0].name}</h1>
+        //     </div>
+        // )
+        return dataArray.map((data) => {
+            return(
+                <div className="cv-display">
+                    <h1 id="name">{data.name}</h1>
+                    <h3 id="title">{data.title}</h3>
+                </div>
+            )
             
+        }           
 
         );
     }

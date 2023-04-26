@@ -7,17 +7,42 @@ class App extends Component {
     super()
 
     this.state = {
+      inputValue: '123',
 
+      dataArray: [
+        {name: 'Agustin', title: 'Game Developer'}
+      ]
     }
 
+    this.showDisplay = this.showDisplay.bind(this);
+  }
+
+  showDisplay(evt) {
+
+    let dataArray = this.state.dataArray
+
+    console.log(evt.target.value)
+    
+
+    const newArray = dataArray.map(data => {
+      if (evt.target.id === 'nameInput') {
+        return {...data, name:evt.target.value}
+      } if (evt.target.id === 'titleInput') {
+        return {...data, title:evt.target.value}
+      } else {
+        return data
+      }
+    })
+
+    this.setState({ dataArray: newArray });
   }
 
   render() {
 
     return(
       <div className="App">
-          <Info></Info>
-          <Display></Display>
+          <Info showDisplay={this.showDisplay}></Info>
+          <Display text={this.state.dataArray}></Display>
       </div>
     );
 

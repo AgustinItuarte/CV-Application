@@ -16,8 +16,8 @@ class Info extends Component {
             <div className="info"> 
                 <div className="personal-data">
                     <h2>Personal Details</h2>
-                    <input placeholder="Name"></input>
-                    <input placeholder="Title"></input>
+                    <input id="nameInput" placeholder="Name" onChange={this.props.showDisplay}></input>
+                    <input id="titleInput" placeholder="Title" onChange={this.props.showDisplay}></input>
                     <input placeholder="Phone"></input>
                     <input placeholder="Email"></input>
                     <input placeholder="Location"></input>
