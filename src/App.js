@@ -10,7 +10,7 @@ class App extends Component {
       inputValue: '123',
 
       dataArray: [
-        {name: 'Agustin', title: 'Game Developer'}
+        {name: 'Agustin Ituarte', title: 'Game Developer', cel: '092164289', email:'agustin242536@gmail.com', location:'Canelones'}
       ]
     }
 
@@ -22,16 +22,29 @@ class App extends Component {
     let dataArray = this.state.dataArray
 
     console.log(evt.target.value)
-    
 
     const newArray = dataArray.map(data => {
-      if (evt.target.id === 'nameInput') {
+      switch (evt.target.id) {
+        case 'nameInput':
+          return {...data, name:evt.target.value};
+        case 'titleInput':
+          return {...data, title:evt.target.value};
+        case 'phoneInput':
+          return {...data, cel:evt.target.value};
+        case 'emailInput':
+          return {...data, email:evt.target.value};
+        case 'locationInput':
+          return {...data, location:evt.target.value};
+        default:
+          return data;
+      }
+      /* if (evt.target.id === 'nameInput') {
         return {...data, name:evt.target.value}
       } if (evt.target.id === 'titleInput') {
         return {...data, title:evt.target.value}
       } else {
         return data
-      }
+      } */
     })
 
     this.setState({ dataArray: newArray });
@@ -41,8 +54,14 @@ class App extends Component {
 
     return(
       <div className="App">
-          <Info showDisplay={this.showDisplay}></Info>
-          <Display text={this.state.dataArray}></Display>
+          <div className="info">
+            <Info showDisplay={this.showDisplay}></Info>
+          </div>
+          
+          <div className="cv-display">
+            <Display text={this.state.dataArray}></Display>
+          </div>
+          
       </div>
     );
 

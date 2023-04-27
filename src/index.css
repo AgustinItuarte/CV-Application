@@ -27,6 +27,7 @@ body, #root, .App {
     border: 1px solid black;
     height: 95%;
     width: 32%;
+    padding: 25px;
 }
 
 .info {
@@ -38,10 +39,16 @@ body, #root, .App {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    padding: 25px;
 }
 
 .cv-display {
     background-color: rgb(170, 103, 103);
 
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
 }

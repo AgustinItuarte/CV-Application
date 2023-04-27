@@ -13,15 +13,14 @@ class Info extends Component {
 
     render(){
         return (
-            <div className="info"> 
+            <div className="info-container"> 
                 <div className="personal-data">
                     <h2>Personal Details</h2>
                     <input id="nameInput" placeholder="Name" onChange={this.props.showDisplay}></input>
                     <input id="titleInput" placeholder="Title" onChange={this.props.showDisplay}></input>
-                    <input placeholder="Phone"></input>
-                    <input placeholder="Email"></input>
-                    <input placeholder="Location"></input>
-                    <input placeholder="Description"></input>
+                    <input id="phoneInput" placeholder="Phone" onChange={this.props.showDisplay}></input>
+                    <input id="emailInput" placeholder="Email" onChange={this.props.showDisplay}></input>
+                    <input id="locationInput" placeholder="Location" onChange={this.props.showDisplay}></input>
                 </div>
                 <div className="work-exp">
                     <h2>Work Experience</h2>
