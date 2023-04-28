@@ -52,3 +52,9 @@ body, #root, .App {
     align-items: center;
     border-bottom: 1px solid black;
 }
+
+.personal-data ,.work-exp {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

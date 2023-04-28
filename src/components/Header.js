@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-class Display extends Component {
+class Header extends Component {
     constructor() {
 
         super()
@@ -12,12 +12,8 @@ class Display extends Component {
     }
 
     render(){
-        let dataArray = this.props.text;
-        // return(
-        //     <div className="cv-display">
-        //         <h1 id="name">{dataArray[0].name}</h1>
-        //     </div>
-        // )
+        let dataArray = this.props.data;
+
         return dataArray.map((data) => {
             return(
                 <div className="header">
@@ -35,10 +31,9 @@ class Display extends Component {
             )
             
         }           
-
         );
         
     }
 }
 
-export default Display;
+export default Header;
