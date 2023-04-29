@@ -28,6 +28,10 @@ class App extends Component {
     this.addExperience = this.addExperience.bind(this);
   }
 
+  handleWorkExperienceChange() {
+    
+  }
+
   addExperience() {
 
     let newObject = {
@@ -88,7 +92,11 @@ class App extends Component {
                      
           <div className="cv-display">
             <Header data={this.state.dataArray}></Header>
-            <WorkExp reference2={this.state.rightWorkRef} workArray={this.state.workArray}></WorkExp>
+
+            <div className="work-experiences">
+              <h2>Work Experience</h2>
+              <WorkExp reference2={this.state.rightWorkRef} workArray={this.state.workArray}></WorkExp>
+            </div>
           </div>
           
       </div>

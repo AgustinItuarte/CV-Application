@@ -15,8 +15,9 @@ class WorkExp extends Component {
         return workExp.map(exp => {
 
             switch (true) {
+
                 case (this.props.reference === true):
-                    return(
+                    return (
                         <div className="work-exp">
                             <input data-id={exp.id} placeholder="Company"></input>
                             <input data-id={exp.id} placeholder="Position"></input>
@@ -25,35 +26,23 @@ class WorkExp extends Component {
                             <input data-id={exp.id} placeholder="Description"></input>
                         </div>
                     );
-                case (this.props.reference2 === true):    
-                    return(
-                        <div className="work-exp" data-id={exp.id}>
 
+                case (this.props.reference2 === true):    
+                    return (
+
+                        <div className="work-exp-display" data-id={exp.id}>
+                            <div className="left-exp">
+                                <h4>Programmer</h4> <div><span>{exp.company} "|" {exp.startDate} "-" {exp.endDate}</span></div>
+                            </div>
+                            <div className="description">{exp.description}</div>
                         </div>
+                        
                     );
+
                 default:
                     return exp;
-            }
 
-            /* if (this.props.reference === true) {
-                return(
-                    <div className="work-exp">
-                        <input data-id={exp.id} placeholder="Company"></input>
-                        <input data-id={exp.id} placeholder="Position"></input>
-                        <input data-id={exp.id} placeholder="Start Date"></input>
-                        <input data-id={exp.id} placeholder="End Date"></input>
-                        <input data-id={exp.id} placeholder="Description"></input>
-                    </div>
-                )
             }
-
-            if (this.props.reference2 === true) {
-                return(
-                <div data-id={exp.id} className="work-exp">
-                </div>
-                )
-            } */
-            
         }
         )
     }
