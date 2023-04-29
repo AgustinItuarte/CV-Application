@@ -36,16 +36,7 @@ class App extends Component {
       id: uniqid()
     };
 
-    this.setState({ workArray: [...this.state.workArray, newObject] }, () => console.log(this.state.workArray));
-
-    /*  <div className="work-exp">
-      <input placeholder="Company"></input>
-      <input placeholder="Position"></input>
-      <input placeholder="Start Date"></input>
-      <input placeholder="End Date"></input>
-      <input placeholder="Description"></input>
-    </div> */
-
+    this.setState({ workArray: [...this.state.workArray, newObject] }, () => console.log(this.state.workArray));    
   }
 
   showDisplay(evt) {
@@ -80,9 +71,16 @@ class App extends Component {
 
     return(
       <div className="App">
+
           <div className="info">
             <Info showDisplay={this.showDisplay}></Info>
-            <WorkExp addExperience={this.addExperience}></WorkExp>
+            
+            <div className="work-experiences">
+              <h2>Work Experience</h2>
+              <WorkExp workArray={this.state.workArray}></WorkExp>
+              <button onClick={this.addExperience}>Add</button>
+            </div>
+            
           </div>
                      
           <div className="cv-display">

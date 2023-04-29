@@ -10,12 +10,20 @@ class WorkExp extends Component {
     }
 
     render() {
-        return(
-            <div className="work-exp">
-                <h2>Work Experience</h2>
-                <button onClick={this.props.addExperience}>Add</button>
-            </div>
-        );
+        let workExp = this.props.workArray;
+
+        return workExp.map(exp => {
+            return(
+                <div className="work-exp">
+                    <input data-id={exp.id} placeholder="Company"></input>
+                    <input data-id={exp.id} placeholder="Position"></input>
+                    <input data-id={exp.id} placeholder="Start Date"></input>
+                    <input data-id={exp.id} placeholder="End Date"></input>
+                    <input data-id={exp.id} placeholder="Description"></input>
+                </div>
+            )
+        }
+        )
     }
 }
 
