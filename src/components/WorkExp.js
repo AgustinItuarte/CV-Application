@@ -19,7 +19,7 @@ class WorkExp extends Component {
                 case (this.props.reference === true):
                     return (
                         <div className="work-exp">
-                            <input data-id={exp.id} placeholder="Company"></input>
+                            <input data-id={exp.id} onChange={this.props.handleChange} placeholder="Company"></input>
                             <input data-id={exp.id} placeholder="Position"></input>
                             <input data-id={exp.id} placeholder="Start Date"></input>
                             <input data-id={exp.id} placeholder="End Date"></input>
