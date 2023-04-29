@@ -10,6 +10,9 @@ class App extends Component {
 
     this.state = {
 
+      leftWorkRef: true,
+      rightWorkRef: true,
+
       dataArray: [
         {name: 'Agustin Ituarte',
         title: 'Game Developer', 
@@ -74,10 +77,10 @@ class App extends Component {
 
           <div className="info">
             <Info showDisplay={this.showDisplay}></Info>
-            
+
             <div className="work-experiences">
               <h2>Work Experience</h2>
-              <WorkExp workArray={this.state.workArray}></WorkExp>
+              <WorkExp reference={this.state.leftWorkRef} workArray={this.state.workArray}></WorkExp>
               <button onClick={this.addExperience}>Add</button>
             </div>
             
@@ -85,6 +88,7 @@ class App extends Component {
                      
           <div className="cv-display">
             <Header data={this.state.dataArray}></Header>
+            <WorkExp reference2={this.state.rightWorkRef} workArray={this.state.workArray}></WorkExp>
           </div>
           
       </div>
