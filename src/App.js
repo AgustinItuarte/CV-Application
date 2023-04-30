@@ -29,7 +29,9 @@ class App extends Component {
         endDate:'Currently working', 
         description:'dwadwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',
         id: uniqid()}
-      ]
+      ],
+
+      educationArray: [],
     }
 
     this.showDisplay = this.showDisplay.bind(this);
@@ -93,10 +95,9 @@ class App extends Component {
 
     this.setState((states) => {
       let newArray = states.workArray.filter((item) => item.id !== id)
-      
       return states.workArray = newArray
-    }, () => this.handleIsWorkExp(this.state.workArray));
 
+    }, () => this.handleIsWorkExp(this.state.workArray));
     
   }
 
@@ -122,18 +123,12 @@ class App extends Component {
     const newArray = dataArray.map(data => {
 
       switch (evt.target.id) {
-        case 'nameInput':
-          return {...data, name:evt.target.value};
-        case 'titleInput':
-          return {...data, title:evt.target.value};
-        case 'phoneInput':
-          return {...data, cel:evt.target.value};
-        case 'emailInput':
-          return {...data, email:evt.target.value};
-        case 'locationInput':
-          return {...data, location:evt.target.value};
-        default:
-          return data;
+        case 'nameInput': return {...data, name:evt.target.value};
+        case 'titleInput': return {...data, title:evt.target.value};
+        case 'phoneInput': return {...data, cel:evt.target.value};
+        case 'emailInput': return {...data, email:evt.target.value};
+        case 'locationInput': return {...data, location:evt.target.value};
+        default: return data;
       }
 
     })
@@ -148,7 +143,7 @@ class App extends Component {
       <div className="App">
 
           <div className="info">
-            <Info showDisplay={this.showDisplay}></Info>
+            <Info dataArray={this.state.dataArray} showDisplay={this.showDisplay}></Info>
 
             <div className="work-experiences">
               <h2>Work Experience</h2>
@@ -156,6 +151,12 @@ class App extends Component {
               <button onClick={this.addExperience}>Add</button>
             </div>
             
+            <div className="educations">
+              <h2>Education</h2>
+
+              <button>Add</button>
+            </div>
+
           </div>
                      
           <div className="cv-display">
