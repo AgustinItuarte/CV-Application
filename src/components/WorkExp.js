@@ -19,11 +19,12 @@ class WorkExp extends Component {
                 case (this.props.reference === true):
                     return (
                         <div className="work-exp">
-                            <input data-id={exp.id} onChange={this.props.handleChange} placeholder="Company"></input>
-                            <input data-id={exp.id} placeholder="Position"></input>
-                            <input data-id={exp.id} placeholder="Start Date"></input>
-                            <input data-id={exp.id} placeholder="End Date"></input>
-                            <input data-id={exp.id} placeholder="Description"></input>
+                            <input data-id={exp.id} id="position" onChange={this.props.handleChange} placeholder="Position"></input>
+                            <input data-id={exp.id} id="company" onChange={this.props.handleChange} placeholder="Company"></input>
+                            <input data-id={exp.id} id="start-date" onChange={this.props.handleChange} placeholder="Start Date"></input>
+                            <input data-id={exp.id} id="end-date" onChange={this.props.handleChange} placeholder="End Date"></input>
+                            <input data-id={exp.id} id="description" onChange={this.props.handleChange} placeholder="Description"></input>
+                            <button>Delete</button>
                         </div>
                     );
 
@@ -32,7 +33,7 @@ class WorkExp extends Component {
 
                         <div className="work-exp-display" data-id={exp.id}>
                             <div className="left-exp">
-                                <h4>Programmer</h4> <div><span>{exp.company} "|" {exp.startDate} "-" {exp.endDate}</span></div>
+                                <h4>{exp.position}</h4> <div><span>{exp.company} | {exp.startDate} - {exp.endDate}</span></div>
                             </div>
                             <div className="description">{exp.description}</div>
                         </div>

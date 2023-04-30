@@ -58,3 +58,8 @@ body, #root, .App {
     flex-direction: column;
     gap: 5px;
 }
+
+.left-exp {
+    display: flex;
+    justify-content: space-between;
+}

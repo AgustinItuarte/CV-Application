@@ -31,21 +31,44 @@ class App extends Component {
 
   handleWorkExperienceChange(e) {
     let newValue = e.target.value;
-    console.log(newValue)
     let workArray = this.state.workArray;
+    let idName = e.target.id;
     let id = e.target.dataset.id;
 
     const newArray = workArray.map(data => {
 
-      if (data.id === id) {
-        return {...data, company: newValue}
+      switch (true) {
+        case (data.id === id && idName === 'company'):
+          
+          return {...data, company: newValue};
+
+        case (data.id === id && idName === 'position'):
+          
+          return {...data, position: newValue};
+
+        case (data.id === id && idName === 'start-date'):
+          
+          return {...data, startDate: newValue};
+
+        case (data.id === id && idName === 'end-date'):
+          
+          return {...data, endDate: newValue};
+
+        case (data.id === id && idName === 'description'):
+          
+          return {...data, description: newValue};
+        
+        default:
+          return data;
       }
-      
-      return data
 
     });
     
     this.setState({ workArray: newArray });
+  }
+
+  deleteWorkExp() {
+    
   }
 
   addExperience() {
