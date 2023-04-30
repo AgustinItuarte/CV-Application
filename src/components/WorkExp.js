@@ -19,11 +19,11 @@ class WorkExp extends Component {
                 case (this.props.reference === true):
                     return (
                         <div className="work-exp">
-                            <input data-id={exp.id} id="position" onChange={this.props.handleChange} placeholder="Position"></input>
-                            <input data-id={exp.id} id="company" onChange={this.props.handleChange} placeholder="Company"></input>
-                            <input data-id={exp.id} id="start-date" onChange={this.props.handleChange} placeholder="Start Date"></input>
-                            <input data-id={exp.id} id="end-date" onChange={this.props.handleChange} placeholder="End Date"></input>
-                            <input data-id={exp.id} id="description" onChange={this.props.handleChange} placeholder="Description"></input>
+                            <input data-id={exp.id} id="position" onChange={this.props.handleChange} value={exp.position} placeholder="Position"></input>
+                            <input data-id={exp.id} id="company" onChange={this.props.handleChange} value={exp.company} placeholder="Company"></input>
+                            <input data-id={exp.id} id="start-date" onChange={this.props.handleChange} value={exp.startDate} placeholder="Start Date"></input>
+                            <input data-id={exp.id} id="end-date" onChange={this.props.handleChange} value={exp.endDate} placeholder="End Date"></input>
+                            <input data-id={exp.id} id="description" onChange={this.props.handleChange} value={exp.description} placeholder="Description"></input>
                             <button data-id={exp.id} onClick={this.props.delete}>Delete</button>
                         </div>
                     );

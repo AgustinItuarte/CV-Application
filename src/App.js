@@ -21,7 +21,14 @@ class App extends Component {
         location:'Canelones'}
       ],
 
-      workArray: []
+      workArray: [
+        {company: 'TCS',
+        position: 'Programmer', 
+        startDate: '24/08/2022', 
+        endDate:'Currently working', 
+        description:'dwadwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',
+        id: uniqid()}
+      ]
     }
 
     this.showDisplay = this.showDisplay.bind(this);
@@ -73,7 +80,6 @@ class App extends Component {
     
     this.setState((states) => {
       let newArray = states.workArray.filter((item) => item.id !== id)
-      console.log(newArray)
       return states.workArray = newArray
     })
 
