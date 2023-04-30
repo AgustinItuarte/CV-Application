@@ -12,6 +12,7 @@ class App extends Component {
 
       leftWorkRef: true,
       rightWorkRef: true,
+      isWorkExp: true,
 
       dataArray: [
         {name: 'Agustin Ituarte',
@@ -35,6 +36,17 @@ class App extends Component {
     this.addExperience = this.addExperience.bind(this);
     this.handleWorkExperienceChange = this.handleWorkExperienceChange.bind(this);
     this.deleteWorkExp = this.deleteWorkExp.bind(this);
+    this.handleIsWorkExp = this.handleIsWorkExp.bind(this);
+  }
+
+  handleIsWorkExp(workArray) {
+
+    if (workArray.length > 0) {
+      this.setState({ isWorkExp: true }, () => console.log(this.state.isWorkExp));
+    } else {
+      this.setState({ isWorkExp: false }, () => console.log(this.state.isWorkExp));
+    }
+    
   }
 
   handleWorkExperienceChange(e) {
@@ -78,11 +90,14 @@ class App extends Component {
   deleteWorkExp(e) {
     let id = e.target.dataset.id;
     
+
     this.setState((states) => {
       let newArray = states.workArray.filter((item) => item.id !== id)
+      
       return states.workArray = newArray
-    })
+    }, () => this.handleIsWorkExp(this.state.workArray));
 
+    
   }
 
   addExperience() {
@@ -96,7 +111,8 @@ class App extends Component {
       id: uniqid()
     };
 
-    this.setState({ workArray: [...this.state.workArray, newObject] }, () => console.log(this.state.workArray));    
+    this.setState({ workArray: [...this.state.workArray, newObject] }, () => this.handleIsWorkExp(this.state.workArray));
+    
   }
 
   showDisplay(evt) {
@@ -126,7 +142,8 @@ class App extends Component {
   }
 
   render() {
-
+    let isWorkExp = this.state.isWorkExp;
+    
     return(
       <div className="App">
 
@@ -143,11 +160,17 @@ class App extends Component {
                      
           <div className="cv-display">
             <Header data={this.state.dataArray}></Header>
-
-            <div className="work-experiences">
-              <h2>Work Experience</h2>
-              <WorkExp reference2={this.state.rightWorkRef} workArray={this.state.workArray}></WorkExp>
-            </div>
+            
+            {isWorkExp ? (
+              <div className="work-experiences">
+                <h2>Work Experience</h2>
+                <WorkExp reference2={this.state.rightWorkRef} workArray={this.state.workArray}></WorkExp>
+              </div>
+            
+            ) : (
+              null
+            )}
+            
           </div>
           
       </div>
