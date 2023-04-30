@@ -27,6 +27,7 @@ class App extends Component {
     this.showDisplay = this.showDisplay.bind(this);
     this.addExperience = this.addExperience.bind(this);
     this.handleWorkExperienceChange = this.handleWorkExperienceChange.bind(this);
+    this.deleteWorkExp = this.deleteWorkExp.bind(this);
   }
 
   handleWorkExperienceChange(e) {
@@ -67,8 +68,15 @@ class App extends Component {
     this.setState({ workArray: newArray });
   }
 
-  deleteWorkExp() {
+  deleteWorkExp(e) {
+    let id = e.target.dataset.id;
     
+    this.setState((states) => {
+      let newArray = states.workArray.filter((item) => item.id !== id)
+      console.log(newArray)
+      return states.workArray = newArray
+    })
+
   }
 
   addExperience() {
@@ -121,7 +129,7 @@ class App extends Component {
 
             <div className="work-experiences">
               <h2>Work Experience</h2>
-              <WorkExp handleChange={this.handleWorkExperienceChange} reference={this.state.leftWorkRef} workArray={this.state.workArray}></WorkExp>
+              <WorkExp delete={this.deleteWorkExp} handleChange={this.handleWorkExperienceChange} reference={this.state.leftWorkRef} workArray={this.state.workArray}></WorkExp>
               <button onClick={this.addExperience}>Add</button>
             </div>
             
