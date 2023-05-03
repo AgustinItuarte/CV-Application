@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import Info from "./components/Info"
 import Header from "./components/Header"
 import WorkExp from "./components/WorkExp"
+import Education from "./components/Education"
 import uniqid from 'uniqid'
 
 class App extends Component {
@@ -13,6 +14,10 @@ class App extends Component {
       leftWorkRef: true,
       rightWorkRef: true,
       isWorkExp: true,
+
+      leftStudyRef: true,
+      rightStudyRef: true,
+      isStudy: true,
 
       dataArray: [
         {name: 'Agustin Ituarte',
@@ -31,7 +36,12 @@ class App extends Component {
         id: uniqid()}
       ],
 
-      educationArray: [],
+      educationArray: [{
+        school: 'UTU',
+        title: 'CS Degree',
+        date: '2022',
+        id: uniqid(),
+      }],
     }
 
     this.showDisplay = this.showDisplay.bind(this);
@@ -41,9 +51,19 @@ class App extends Component {
     this.handleIsWorkExp = this.handleIsWorkExp.bind(this);
   }
 
-  handleIsWorkExp(workArray) {
+  handleIsWorkExp(array) {
 
-    if (workArray.length > 0) {
+    if (array.length > 0) {
+      this.setState({ isWorkExp: true }, () => console.log(this.state.isWorkExp));
+    } else {
+      this.setState({ isWorkExp: false }, () => console.log(this.state.isWorkExp));
+    }
+    
+  }
+
+  handleIsStudies(array) {
+
+    if (array.length > 0) {
       this.setState({ isWorkExp: true }, () => console.log(this.state.isWorkExp));
     } else {
       this.setState({ isWorkExp: false }, () => console.log(this.state.isWorkExp));
@@ -60,28 +80,12 @@ class App extends Component {
     const newArray = workArray.map(data => {
 
       switch (true) {
-        case (data.id === id && idName === 'company'):
-          
-          return {...data, company: newValue};
-
-        case (data.id === id && idName === 'position'):
-          
-          return {...data, position: newValue};
-
-        case (data.id === id && idName === 'start-date'):
-          
-          return {...data, startDate: newValue};
-
-        case (data.id === id && idName === 'end-date'):
-          
-          return {...data, endDate: newValue};
-
-        case (data.id === id && idName === 'description'):
-          
-          return {...data, description: newValue};
-        
-        default:
-          return data;
+        case (data.id === id && idName === 'company'): return {...data, company: newValue};
+        case (data.id === id && idName === 'position'): return {...data, position: newValue};
+        case (data.id === id && idName === 'start-date'): return {...data, startDate: newValue};
+        case (data.id === id && idName === 'end-date'): return {...data, endDate: newValue};
+        case (data.id === id && idName === 'description'): return {...data, description: newValue};
+        default: return data;
       }
 
     });
@@ -101,18 +105,35 @@ class App extends Component {
     
   }
 
-  addExperience() {
+  addExperience(e) {
 
-    let newObject = {
-      company: '',
-      position: '',
-      startDate: '',
-      endDate: '',
-      description: '',
-      id: uniqid()
-    };
+    if (e.target.className === 'add-work-btn') {
 
-    this.setState({ workArray: [...this.state.workArray, newObject] }, () => this.handleIsWorkExp(this.state.workArray));
+      let newObject = {
+        company: '',
+        position: '',
+        startDate: '',
+        endDate: '',
+        description: '',
+        id: uniqid()
+      };
+      
+      this.setState({ workArray: [...this.state.workArray, newObject] }, () => this.handleIsWorkExp(this.state.workArray));
+      
+    } else {
+      let newObject = {
+        company: '',
+        position: '',
+        startDate: '',
+        endDate: '',
+        description: '',
+        id: uniqid()
+      };
+
+      this.setState({ educationArray: [...this.state.educationArray, newObject] }, () => this.handleIsStudies(this.state.educationArray));
+    }
+
+    
     
   }
 
@@ -138,6 +159,7 @@ class App extends Component {
 
   render() {
     let isWorkExp = this.state.isWorkExp;
+    let isStudy = this.state.isStudy;
     
     return(
       <div className="App">
@@ -148,13 +170,13 @@ class App extends Component {
             <div className="work-experiences">
               <h2>Work Experience</h2>
               <WorkExp delete={this.deleteWorkExp} handleChange={this.handleWorkExperienceChange} reference={this.state.leftWorkRef} workArray={this.state.workArray}></WorkExp>
-              <button onClick={this.addExperience}>Add</button>
+              <button className="add-work-btn" onClick={this.addExperience}>Add</button>
             </div>
             
             <div className="educations">
               <h2>Education</h2>
-
-              <button>Add</button>
+              <Education delete={this.deleteWorkExp} handleChange={this.handleWorkExperienceChange} reference={this.state.leftWorkRef} educationArray={this.state.educationArray}></Education>
+              <button className="add-study-btn" onClick={this.addExperience}>Add</button>
             </div>
 
           </div>
@@ -171,6 +193,17 @@ class App extends Component {
             ) : (
               null
             )}
+
+            {isStudy ? (
+              <div className="educations">
+                <h2>Education</h2>
+                <Education reference2={this.state.rightStudyRef} educationArray={this.state.educationArray}></Education>
+              </div>
+            
+            ) : (
+              null
+            )}
+
             
           </div>
           
