@@ -49,6 +49,7 @@ class App extends Component {
     this.handleWorkExperienceChange = this.handleWorkExperienceChange.bind(this);
     this.deleteWorkExp = this.deleteWorkExp.bind(this);
     this.handleIsWorkExp = this.handleIsWorkExp.bind(this);
+    this.handleStudiesChange = this.handleStudiesChange.bind(this);
   }
 
   handleIsWorkExp(array) {
@@ -91,6 +92,26 @@ class App extends Component {
     });
     
     this.setState({ workArray: newArray });
+  }
+
+  handleStudiesChange(e) {
+    let newValue = e.target.value;
+    let educationArray = this.state.educationArray;
+    let idName = e.target.id;
+    let id = e.target.dataset.id;
+
+    const newArray = educationArray.map(data => {
+
+      switch (true) {
+        case (data.id === id && idName === 'school'): return {...data, school: newValue};
+        case (data.id === id && idName === 'title'): return {...data, title: newValue};
+        case (data.id === id && idName === 'date'): return {...data, date: newValue};
+        default: return data;
+      }
+
+    });
+    
+    this.setState({ educationArray: newArray });
   }
 
   deleteWorkExp(e) {
@@ -183,7 +204,7 @@ class App extends Component {
             
             <div className="educations">
               <h2>Education</h2>
-              <Education delete={this.deleteWorkExp} handleChange={this.handleWorkExperienceChange} reference={this.state.leftWorkRef} educationArray={this.state.educationArray}></Education>
+              <Education delete={this.deleteWorkExp} handleChange={this.handleStudiesChange} reference={this.state.leftWorkRef} educationArray={this.state.educationArray}></Education>
               <button className="add-study-btn" onClick={this.addExperience}>Add</button>
             </div>
 

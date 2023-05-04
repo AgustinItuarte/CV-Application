@@ -18,8 +18,8 @@ class Education extends Component {
                 case (this.props.reference === true):
                     return (
                         <div className="studies-left">
-                            <input data-id={study.id} id="school" onChange={this.props.handleChange} value={study.school} placeholder="School"></input>
                             <input data-id={study.id} id="title" onChange={this.props.handleChange} value={study.title} placeholder="Title"></input>
+                            <input data-id={study.id} id="school" onChange={this.props.handleChange} value={study.school} placeholder="School"></input>
                             <input data-id={study.id} id="date" onChange={this.props.handleChange} value={study.date} placeholder="Date"></input>
                             <button id="btn-delete-study" data-id={study.id} onClick={this.props.delete}>Delete</button>
                         </div>
