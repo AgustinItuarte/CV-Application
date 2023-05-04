@@ -36,12 +36,14 @@ class App extends Component {
         id: uniqid()}
       ],
 
-      educationArray: [{
-        school: 'UTU',
+      educationArray: [
+        {
+        school: 'Universidad de la Republica',
         title: 'CS Degree',
         date: '2022',
         id: uniqid(),
-      }],
+      }
+    ],
     }
 
     this.showDisplay = this.showDisplay.bind(this);
@@ -130,7 +132,7 @@ class App extends Component {
         let newArray = states.educationArray.filter((item) => item.id !== id)
         return states.educationArray = newArray
   
-      }, () => this.handleIsStudies(this.state.workArray));
+      }, () => this.handleIsStudies(this.state.educationArray));
     }
     
     
