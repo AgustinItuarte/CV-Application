@@ -64,9 +64,9 @@ class App extends Component {
   handleIsStudies(array) {
 
     if (array.length > 0) {
-      this.setState({ isWorkExp: true }, () => console.log(this.state.isWorkExp));
+      this.setState({ isStudy: true }, () => console.log(this.state.isStudy));
     } else {
-      this.setState({ isWorkExp: false }, () => console.log(this.state.isWorkExp));
+      this.setState({ isStudy: false }, () => console.log(this.state.isStudy));
     }
     
   }
@@ -95,13 +95,23 @@ class App extends Component {
 
   deleteWorkExp(e) {
     let id = e.target.dataset.id;
+    let btn = e.target.id;
     
+    if (btn === 'btn-delete-work') {
+      this.setState((states) => {
+        let newArray = states.workArray.filter((item) => item.id !== id)
+        return states.workArray = newArray
+  
+      }, () => this.handleIsWorkExp(this.state.workArray));
 
-    this.setState((states) => {
-      let newArray = states.workArray.filter((item) => item.id !== id)
-      return states.workArray = newArray
-
-    }, () => this.handleIsWorkExp(this.state.workArray));
+    } else {
+      this.setState((states) => {
+        let newArray = states.educationArray.filter((item) => item.id !== id)
+        return states.educationArray = newArray
+  
+      }, () => this.handleIsStudies(this.state.workArray));
+    }
+    
     
   }
 
@@ -122,12 +132,10 @@ class App extends Component {
       
     } else {
       let newObject = {
-        company: '',
-        position: '',
-        startDate: '',
-        endDate: '',
-        description: '',
-        id: uniqid()
+        school: '',
+        title: '',
+        date: '',
+        id: uniqid(),
       };
 
       this.setState({ educationArray: [...this.state.educationArray, newObject] }, () => this.handleIsStudies(this.state.educationArray));

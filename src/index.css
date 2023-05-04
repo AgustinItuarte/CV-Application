@@ -53,7 +53,7 @@ body, #root, .App {
     border-bottom: 1px solid black;
 }
 
-.personal-data ,.work-exp {
+.personal-data ,.work-exp, .studies-left {
     display: flex;
     flex-direction: column;
     gap: 5px;

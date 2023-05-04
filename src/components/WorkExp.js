@@ -24,7 +24,7 @@ class WorkExp extends Component {
                             <input data-id={exp.id} id="start-date" onChange={this.props.handleChange} value={exp.startDate} placeholder="Start Date"></input>
                             <input data-id={exp.id} id="end-date" onChange={this.props.handleChange} value={exp.endDate} placeholder="End Date"></input>
                             <input data-id={exp.id} id="description" onChange={this.props.handleChange} value={exp.description} placeholder="Description"></input>
-                            <button data-id={exp.id} onClick={this.props.delete}>Delete</button>
+                            <button id="btn-delete-work" data-id={exp.id} onClick={this.props.delete}>Delete</button>
                         </div>
                     );
 
