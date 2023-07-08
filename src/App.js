@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-import Info from "./components/Info"
-import Header from "./components/Header"
-import WorkExp from "./components/WorkExp"
-import Education from "./components/Education"
-import uniqid from 'uniqid'
+import Info from "./components/Info";
+import Header from "./components/Header";
+import WorkExp from "./components/WorkExp";
+import Education from "./components/Education";
+import uniqid from 'uniqid';
 
 class App extends Component {
   constructor(){
