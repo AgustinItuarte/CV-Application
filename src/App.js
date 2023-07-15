@@ -1,50 +1,55 @@
-import React, {Component} from "react";
+import React, {useState} from "react";
 import Info from "./components/Info";
 import Header from "./components/Header";
 import WorkExp from "./components/WorkExp";
 import Education from "./components/Education";
 import uniqid from 'uniqid';
 
-class App extends Component {
-  constructor(){
-    super()
+function App() {
 
-    this.state = {
+  const [dataArray, setDataArray] = useState([{
+    name: 'Agustin Ituarte',
+    title: 'Game Developer', 
+    cel: '092164289', 
+    email:'agustin242536@gmail.com', 
+    location:'Canelones'
+  }]);
+  /* this.state = {
 
-      leftWorkRef: true,
-      rightWorkRef: true,
-      isWorkExp: true,
+    leftWorkRef: true,
+    rightWorkRef: true,
+    isWorkExp: true,
 
-      leftStudyRef: true,
-      rightStudyRef: true,
-      isStudy: true,
+    leftStudyRef: true,
+    rightStudyRef: true,
+    isStudy: true,
 
-      dataArray: [
-        {name: 'Agustin Ituarte',
-        title: 'Game Developer', 
-        cel: '092164289', 
-        email:'agustin242536@gmail.com', 
-        location:'Canelones'}
-      ],
-
-      workArray: [
-        {company: 'TCS',
-        position: 'Programmer', 
-        startDate: '24/08/2022', 
-        endDate:'Currently working', 
-        description:'dwadwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',
-        id: uniqid()}
-      ],
-
-      educationArray: [
-        {
-        school: 'Universidad de la Republica',
-        title: 'CS Degree',
-        date: '2022',
-        id: uniqid(),
-      }
+    dataArray: [
+      {name: 'Agustin Ituarte',
+      title: 'Game Developer', 
+      cel: '092164289', 
+      email:'agustin242536@gmail.com', 
+      location:'Canelones'}
     ],
+
+    workArray: [
+      {company: 'TCS',
+      position: 'Programmer', 
+      startDate: '24/08/2022', 
+      endDate:'Currently working', 
+      description:'dwadwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',
+      id: uniqid()}
+    ],
+
+    educationArray: [
+      {
+      school: 'Universidad de la Republica',
+      title: 'CS Degree',
+      date: '2022',
+      id: uniqid(),
     }
+  ],
+  }
 
     this.showDisplay = this.showDisplay.bind(this);
     this.addExperience = this.addExperience.bind(this);
@@ -52,9 +57,9 @@ class App extends Component {
     this.deleteWorkExp = this.deleteWorkExp.bind(this);
     this.handleIsWorkExp = this.handleIsWorkExp.bind(this);
     this.handleStudiesChange = this.handleStudiesChange.bind(this);
-  }
+  } */
 
-  handleIsWorkExp(array) {
+  const handleIsWorkExp = (array) => {
 
     if (array.length > 0) {
       this.setState({ isWorkExp: true }, () => console.log(this.state.isWorkExp));
@@ -64,7 +69,7 @@ class App extends Component {
     
   }
 
-  handleIsStudies(array) {
+  const handleIsStudies = (array) => {
 
     if (array.length > 0) {
       this.setState({ isStudy: true }, () => console.log(this.state.isStudy));
@@ -74,7 +79,7 @@ class App extends Component {
     
   }
 
-  handleWorkExperienceChange(e) {
+  const handleWorkExperienceChange = (e) => {
     let newValue = e.target.value;
     let workArray = this.state.workArray;
     let idName = e.target.id;
@@ -96,7 +101,7 @@ class App extends Component {
     this.setState({ workArray: newArray });
   }
 
-  handleStudiesChange(e) {
+  const handleStudiesChange = (e) => {
     let newValue = e.target.value;
     let educationArray = this.state.educationArray;
     let idName = e.target.id;
@@ -116,7 +121,7 @@ class App extends Component {
     this.setState({ educationArray: newArray });
   }
 
-  deleteWorkExp(e) {
+  const deleteWorkExp = (e) => {
     let id = e.target.dataset.id;
     let btn = e.target.id;
     
@@ -134,11 +139,10 @@ class App extends Component {
   
       }, () => this.handleIsStudies(this.state.educationArray));
     }
-    
-    
+      
   }
 
-  addExperience(e) {
+  const addExperience = (e) => {
 
     if (e.target.className === 'add-work-btn') {
 
@@ -168,9 +172,7 @@ class App extends Component {
     
   }
 
-  showDisplay(evt) {
-
-    let dataArray = this.state.dataArray
+  const showDisplay = (evt) => {
 
     const newArray = dataArray.map(data => {
 
@@ -184,64 +186,58 @@ class App extends Component {
       }
 
     })
-
-    this.setState({ dataArray: newArray });
+    setDataArray(newArray);
   }
+        
+  return(
+    /* let isWorkExp = this.state.isWorkExp;
+    let isStudy = this.state.isStudy; */
+    <div className="App">
 
-  render() {
-    let isWorkExp = this.state.isWorkExp;
-    let isStudy = this.state.isStudy;
-    
-    return(
-      <div className="App">
+        <div className="info">
+          <Info dataArray={dataArray} showDisplay={showDisplay}></Info>
 
-          <div className="info">
-            <Info dataArray={this.state.dataArray} showDisplay={this.showDisplay}></Info>
-
-            <div className="work-experiences">
-              <h2>Work Experience</h2>
-              <WorkExp delete={this.deleteWorkExp} handleChange={this.handleWorkExperienceChange} reference={this.state.leftWorkRef} workArray={this.state.workArray}></WorkExp>
-              <button className="add-work-btn" onClick={this.addExperience}>Add</button>
-            </div>
-            
-            <div className="educations">
-              <h2>Education</h2>
-              <Education delete={this.deleteWorkExp} handleChange={this.handleStudiesChange} reference={this.state.leftWorkRef} educationArray={this.state.educationArray}></Education>
-              <button className="add-study-btn" onClick={this.addExperience}>Add</button>
-            </div>
-
-          </div>
-                     
-          <div className="cv-display">
-            <Header data={this.state.dataArray}></Header>
-            
-            {isWorkExp ? (
-              <div className="work-experiences">
-                <h2>Work Experience</h2>
-                <WorkExp reference2={this.state.rightWorkRef} workArray={this.state.workArray}></WorkExp>
-              </div>
-            
-            ) : (
-              null
-            )}
-
-            {isStudy ? (
-              <div className="educations">
-                <h2>Education</h2>
-                <Education reference2={this.state.rightStudyRef} educationArray={this.state.educationArray}></Education>
-              </div>
-            
-            ) : (
-              null
-            )}
-
-            
+          {/* <div className="work-experiences">
+            <h2>Work Experience</h2>
+            <WorkExp delete={this.deleteWorkExp} handleChange={this.handleWorkExperienceChange} reference={this.state.leftWorkRef} workArray={this.state.workArray}></WorkExp>
+            <button className="add-work-btn" onClick={this.addExperience}>Add</button>
           </div>
           
-      </div>
-    );
+          <div className="educations">
+            <h2>Education</h2>
+            <Education delete={this.deleteWorkExp} handleChange={this.handleStudiesChange} reference={this.state.leftWorkRef} educationArray={this.state.educationArray}></Education>
+            <button className="add-study-btn" onClick={this.addExperience}>Add</button>
+          </div> */}
 
-  }
+        </div>
+                    
+        <div className="cv-display">
+          <Header dataArray={dataArray}></Header>
+          
+          {/* {isWorkExp ? (
+            <div className="work-experiences">
+              <h2>Work Experience</h2>
+              <WorkExp reference2={this.state.rightWorkRef} workArray={this.state.workArray}></WorkExp>
+            </div>
+          
+          ) : (
+            null
+          )}
+
+          {isStudy ? (
+            <div className="educations">
+              <h2>Education</h2>
+              <Education reference2={this.state.rightStudyRef} educationArray={this.state.educationArray}></Education>
+            </div>
+          
+          ) : (
+            null
+          )} */}
+
+          
+        </div>
+        
+    </div>
+  );
 }
-
 export default App;
