@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Info from "./components/Info";
 import Header from "./components/Header";
 import WorkExp from "./components/WorkExp";
@@ -72,6 +72,10 @@ function App() {
     this.handleStudiesChange = this.handleStudiesChange.bind(this);
   } */
 
+  useEffect(() => {
+    handleIsWorkExp(workArray)
+  }, [workArray]);
+
   const handleIsWorkExp = (array) => {
 
     if (array.length > 0) {
@@ -138,12 +142,11 @@ function App() {
     let btn = e.target.id;
     
     if (btn === 'btn-delete-work') {
-      this.setState((states) => {
-        let newArray = states.workArray.filter((item) => item.id !== id)
-        return states.workArray = newArray
-  
-      }, () => this.handleIsWorkExp(this.state.workArray));
 
+      let newWorkArray = workArray.filter((item) => item.id !== id)
+      setWorkArray(newWorkArray);
+      console.log(workArray)
+      
     } else {
       this.setState((states) => {
         let newArray = states.educationArray.filter((item) => item.id !== id)
@@ -167,10 +170,8 @@ function App() {
         id: uniqid()
       };
       
-      /* this.setState({ workArray: [...this.state.workArray, newObject] }, () => this.handleIsWorkExp(this.state.workArray)); */
       setWorkArray(workArray => [...workArray, newObject]);
-      handleIsWorkExp(workArray)
-      
+
     } else {
       let newObject = {
         school: '',
@@ -180,9 +181,7 @@ function App() {
       };
 
       this.setState({ educationArray: [...this.state.educationArray, newObject] }, () => this.handleIsStudies(this.state.educationArray));
-    }
-
-    
+    }  
     
   }
 
