@@ -13,7 +13,7 @@ function WorkExp (props) {
                         <input data-id={exp.id} id="end-date" onChange={props.handleChange} value={exp.endDate} placeholder="End Date"></input>
                         <input data-id={exp.id} id="description" onChange={props.handleChange} value={exp.description} placeholder="Description"></input>
                         
-                        {/* <span><button id="btn-delete-work" data-id={exp.id} onClick={this.props.delete}>Delete</button></span>  */}
+                        <span><button id="btn-delete-work" data-id={exp.id} onClick={props.delete}>Delete</button></span> 
                     </div>
                 );
 

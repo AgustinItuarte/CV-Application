@@ -167,7 +167,9 @@ function App() {
         id: uniqid()
       };
       
-      this.setState({ workArray: [...this.state.workArray, newObject] }, () => this.handleIsWorkExp(this.state.workArray));
+      /* this.setState({ workArray: [...this.state.workArray, newObject] }, () => this.handleIsWorkExp(this.state.workArray)); */
+      setWorkArray(workArray => [...workArray, newObject]);
+      handleIsWorkExp(workArray)
       
     } else {
       let newObject = {
@@ -211,7 +213,7 @@ function App() {
 
           <div className="work-experiences">
             <h2>Work Experience</h2>
-            <WorkExp /* delete={this.deleteWorkExp} */ handleChange={handleWorkExperienceChange} reference={leftWorkRef} workArray={workArray}></WorkExp>
+            <WorkExp delete={deleteWorkExp} handleChange={handleWorkExperienceChange} reference={leftWorkRef} workArray={workArray}></WorkExp>
             <button className="add-work-btn" onClick={addExperience}>Add</button>
           </div>
           
