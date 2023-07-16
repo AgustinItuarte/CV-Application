@@ -1,47 +1,36 @@
-import React, {Component} from "react";
+function Education (props) {
 
-class Education extends Component {
-    constructor() {
-        super();
+    return props.educationArray.map(study => {
 
-        this.state = {}
-    }
+        switch (true) {
 
+            case (props.reference === true):
+                return (
+                    <div className="studies-left">
+                        <input data-id={study.id} id="title" onChange={props.handleChange} value={study.title} placeholder="Title"></input>
+                        <input data-id={study.id} id="school" onChange={props.handleChange} value={study.school} placeholder="School"></input>
+                        <input data-id={study.id} id="date" onChange={props.handleChange} value={study.date} placeholder="Date"></input>
+                        <span><button id="btn-delete-study" data-id={study.id} onClick={props.delete}>Delete</button></span> 
+                    </div>
+                );
 
-    render() {
-        let educationArray = this.props.educationArray;
+            case (props.reference2 === true):    
+                return (
 
-        return educationArray.map(study => {
-
-            switch (true) {
-
-                case (this.props.reference === true):
-                    return (
-                        <div className="studies-left">
-                            <input data-id={study.id} id="title" onChange={this.props.handleChange} value={study.title} placeholder="Title"></input>
-                            <input data-id={study.id} id="school" onChange={this.props.handleChange} value={study.school} placeholder="School"></input>
-                            <input data-id={study.id} id="date" onChange={this.props.handleChange} value={study.date} placeholder="Date"></input>
-                            <span><button id="btn-delete-study" data-id={study.id} onClick={this.props.delete}>Delete</button></span> 
+                    <div className="work-study-display" data-id={study.id}>
+                        <div className="left-study">
+                            <h4>{study.title}</h4> <div><span>{study.school} | {study.date}</span></div>
                         </div>
-                    );
+                    </div>
+                    
+                );
 
-                case (this.props.reference2 === true):    
-                    return (
+            default: return study;
 
-                        <div className="work-study-display" data-id={study.id}>
-                            <div className="left-study">
-                                <h4>{study.title}</h4> <div><span>{study.school} | {study.date}</span></div>
-                            </div>
-                        </div>
-                        
-                    );
-
-                default: return study;
-
-            }
         }
-        )
     }
-    }
+    )
+
+}
 
 export default Education;

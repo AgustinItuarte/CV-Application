@@ -7,9 +7,11 @@ import uniqid from 'uniqid';
 
 function App() {
 
-  const [leftWorkRef, setLefWorkRef] = useState(true);
-  const [rightWorkRef, setRightWorkRef] = useState(true);
+  const [leftWorkRef] = useState(true);
+  const [rightWorkRef] = useState(true);
   const [isWorkExp, setIsWorkExp] = useState(true);
+  const [rightStudyRef] = useState(true);
+  const [isStudy, setIsStudy] = useState(true);
 
   const [dataArray, setDataArray] = useState([{
     name: 'Agustin Ituarte',
@@ -27,54 +29,18 @@ function App() {
     description:'dwadwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',
     id: uniqid()
   }]);
-  /* this.state = {
 
-    leftWorkRef: true,
-    rightWorkRef: true,
-    isWorkExp: true,
-
-    leftStudyRef: true,
-    rightStudyRef: true,
-    isStudy: true,
-
-    dataArray: [
-      {name: 'Agustin Ituarte',
-      title: 'Game Developer', 
-      cel: '092164289', 
-      email:'agustin242536@gmail.com', 
-      location:'Canelones'}
-    ],
-
-    workArray: [
-      {company: 'TCS',
-      position: 'Programmer', 
-      startDate: '24/08/2022', 
-      endDate:'Currently working', 
-      description:'dwadwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',
-      id: uniqid()}
-    ],
-
-    educationArray: [
-      {
-      school: 'Universidad de la Republica',
-      title: 'CS Degree',
-      date: '2022',
-      id: uniqid(),
-    }
-  ],
-  }
-
-    this.showDisplay = this.showDisplay.bind(this);
-    this.addExperience = this.addExperience.bind(this);
-    this.handleWorkExperienceChange = this.handleWorkExperienceChange.bind(this);
-    this.deleteWorkExp = this.deleteWorkExp.bind(this);
-    this.handleIsWorkExp = this.handleIsWorkExp.bind(this);
-    this.handleStudiesChange = this.handleStudiesChange.bind(this);
-  } */
+  const [educationArray, setEducationArray] = useState([{
+    school: 'Universidad de la Republica',
+    title: 'CS Degree',
+    date: '2022',
+    id: uniqid(),
+  }]);
 
   useEffect(() => {
-    handleIsWorkExp(workArray)
-  }, [workArray]);
+    handleIsWorkExp(workArray);
+    handleIsStudies(educationArray);
+  }, [workArray, educationArray]);
 
   const handleIsWorkExp = (array) => {
 
@@ -89,11 +55,30 @@ function App() {
   const handleIsStudies = (array) => {
 
     if (array.length > 0) {
-      this.setState({ isStudy: true }, () => console.log(this.state.isStudy));
+      setIsStudy(true);
     } else {
-      this.setState({ isStudy: false }, () => console.log(this.state.isStudy));
+      setIsStudy(false);
     }
     
+  }
+
+  const handleStudiesChange = (e) => {
+    let newValue = e.target.value;
+    let idName = e.target.id;
+    let id = e.target.dataset.id;
+
+    const newArray = educationArray.map(data => {
+
+      switch (true) {
+        case (data.id === id && idName === 'school'): return {...data, school: newValue};
+        case (data.id === id && idName === 'title'): return {...data, title: newValue};
+        case (data.id === id && idName === 'date'): return {...data, date: newValue};
+        default: return data;
+      }
+
+    });
+    
+    setEducationArray(newArray)
   }
 
   const handleWorkExperienceChange = (e) => {
@@ -117,26 +102,6 @@ function App() {
     setWorkArray(newArray);
   }
 
-  const handleStudiesChange = (e) => {
-    let newValue = e.target.value;
-    let educationArray = this.state.educationArray;
-    let idName = e.target.id;
-    let id = e.target.dataset.id;
-
-    const newArray = educationArray.map(data => {
-
-      switch (true) {
-        case (data.id === id && idName === 'school'): return {...data, school: newValue};
-        case (data.id === id && idName === 'title'): return {...data, title: newValue};
-        case (data.id === id && idName === 'date'): return {...data, date: newValue};
-        default: return data;
-      }
-
-    });
-    
-    this.setState({ educationArray: newArray });
-  }
-
   const deleteWorkExp = (e) => {
     let id = e.target.dataset.id;
     let btn = e.target.id;
@@ -145,14 +110,12 @@ function App() {
 
       let newWorkArray = workArray.filter((item) => item.id !== id)
       setWorkArray(newWorkArray);
-      console.log(workArray)
       
     } else {
-      this.setState((states) => {
-        let newArray = states.educationArray.filter((item) => item.id !== id)
-        return states.educationArray = newArray
-  
-      }, () => this.handleIsStudies(this.state.educationArray));
+
+      let newEducationArray = educationArray.filter((item) => item.id !== id)
+      setEducationArray(newEducationArray);
+
     }
       
   }
@@ -180,7 +143,7 @@ function App() {
         id: uniqid(),
       };
 
-      this.setState({ educationArray: [...this.state.educationArray, newObject] }, () => this.handleIsStudies(this.state.educationArray));
+      setEducationArray(educationArray => [...educationArray, newObject]);
     }  
     
   }
@@ -203,8 +166,6 @@ function App() {
   }
         
   return(
-    /* let isWorkExp = this.state.isWorkExp;
-    let isStudy = this.state.isStudy; */
     <div className="App">
 
         <div className="info">
@@ -216,11 +177,11 @@ function App() {
             <button className="add-work-btn" onClick={addExperience}>Add</button>
           </div>
           
-          {/* <div className="educations">
+          <div className="educations">
             <h2>Education</h2>
-            <Education delete={this.deleteWorkExp} handleChange={this.handleStudiesChange} reference={this.state.leftWorkRef} educationArray={this.state.educationArray}></Education>
-            <button className="add-study-btn" onClick={this.addExperience}>Add</button>
-          </div> */}
+            <Education delete={deleteWorkExp} handleChange={handleStudiesChange} reference={leftWorkRef} educationArray={educationArray}></Education>
+            <button className="add-study-btn" onClick={addExperience}>Add</button>
+          </div>
 
         </div>
                     
@@ -237,15 +198,15 @@ function App() {
             null
           )}
 
-          {/* {isStudy ? (
+          {isStudy ? (
             <div className="educations">
               <h2>Education</h2>
-              <Education reference2={this.state.rightStudyRef} educationArray={this.state.educationArray}></Education>
+              <Education reference2={rightStudyRef} educationArray={educationArray}></Education>
             </div>
           
           ) : (
             null
-          )} */}
+          )}
 
           
         </div>
