@@ -7,12 +7,25 @@ import uniqid from 'uniqid';
 
 function App() {
 
+  const [leftWorkRef, setLefWorkRef] = useState(true);
+  const [rightWorkRef, setRightWorkRef] = useState(true);
+  const [isWorkExp, setIsWorkExp] = useState(true);
+
   const [dataArray, setDataArray] = useState([{
     name: 'Agustin Ituarte',
     title: 'Game Developer', 
     cel: '092164289', 
     email:'agustin242536@gmail.com', 
     location:'Canelones'
+  }]);
+
+  const [workArray, setWorkArray] = useState([{
+    company: 'TCS',
+    position: 'Programmer', 
+    startDate: '24/08/2022', 
+    endDate:'Currently working', 
+    description:'dwadwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',
+    id: uniqid()
   }]);
   /* this.state = {
 
@@ -62,9 +75,9 @@ function App() {
   const handleIsWorkExp = (array) => {
 
     if (array.length > 0) {
-      this.setState({ isWorkExp: true }, () => console.log(this.state.isWorkExp));
+      setIsWorkExp(true)
     } else {
-      this.setState({ isWorkExp: false }, () => console.log(this.state.isWorkExp));
+      setIsWorkExp(false)
     }
     
   }
@@ -81,7 +94,6 @@ function App() {
 
   const handleWorkExperienceChange = (e) => {
     let newValue = e.target.value;
-    let workArray = this.state.workArray;
     let idName = e.target.id;
     let id = e.target.dataset.id;
 
@@ -98,7 +110,7 @@ function App() {
 
     });
     
-    this.setState({ workArray: newArray });
+    setWorkArray(newArray);
   }
 
   const handleStudiesChange = (e) => {
@@ -197,13 +209,13 @@ function App() {
         <div className="info">
           <Info dataArray={dataArray} showDisplay={showDisplay}></Info>
 
-          {/* <div className="work-experiences">
+          <div className="work-experiences">
             <h2>Work Experience</h2>
-            <WorkExp delete={this.deleteWorkExp} handleChange={this.handleWorkExperienceChange} reference={this.state.leftWorkRef} workArray={this.state.workArray}></WorkExp>
-            <button className="add-work-btn" onClick={this.addExperience}>Add</button>
+            <WorkExp /* delete={this.deleteWorkExp} */ handleChange={handleWorkExperienceChange} reference={leftWorkRef} workArray={workArray}></WorkExp>
+            <button className="add-work-btn" onClick={addExperience}>Add</button>
           </div>
           
-          <div className="educations">
+          {/* <div className="educations">
             <h2>Education</h2>
             <Education delete={this.deleteWorkExp} handleChange={this.handleStudiesChange} reference={this.state.leftWorkRef} educationArray={this.state.educationArray}></Education>
             <button className="add-study-btn" onClick={this.addExperience}>Add</button>
@@ -214,17 +226,17 @@ function App() {
         <div className="cv-display">
           <Header dataArray={dataArray}></Header>
           
-          {/* {isWorkExp ? (
+          {isWorkExp ? (
             <div className="work-experiences">
               <h2>Work Experience</h2>
-              <WorkExp reference2={this.state.rightWorkRef} workArray={this.state.workArray}></WorkExp>
+              <WorkExp reference2={rightWorkRef} workArray={workArray}></WorkExp>
             </div>
           
           ) : (
             null
           )}
 
-          {isStudy ? (
+          {/* {isStudy ? (
             <div className="educations">
               <h2>Education</h2>
               <Education reference2={this.state.rightStudyRef} educationArray={this.state.educationArray}></Education>
